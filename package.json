@@ -1,0 +1,30 @@
+{
+  "name": "soup-to-bits-pub-sub",
+  "version": "0.0.0",
+  "description": "soup to bits pub sub",
+  "main": "app.js",
+  "scripts": {
+    "test": "mocha tests"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/codeschool/nodejs-soup-to-bits.git"
+  },
+  "keywords": [
+    "soup",
+    "to",
+    "bits",
+    "pub",
+    "sub"
+  ],
+  "author": "TJ Krusinski <tjkrus@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/codeschool/nodejs-soup-to-bits/issues"
+  },
+  "homepage": "https://github.com/codeschool/nodejs-soup-to-bits",
+  "dependencies": {
+    "axon": "^2.0.0",
+    "express": "^3.5.1"
+  }
+}
