@@ -1,21 +1,23 @@
 'use strict';
 
 var express = require('express');
-var axon = require('axon');
+var routes = require('./routes');
 
 var app = express();
-var socket = axon.socket('pub');
 
-socket.bind(8001);
-app.listen(8000);
+/**
+ *  Have our server listen on port 8000
+ */
+app.listen(8000, function(){
+  console.log('Server running on port %d', 8000);
+});
 
 /**
  *  Parse json data from incoming reuqests
  */
 app.use(express.json());
 
-app.post('/', function(req, res){
-  var badge = req.body;
-  socket.send('badge', badge);
-  res.send(200, 'success');
-});
+/**
+ *  Accept POST requests and then publish the body of the request
+ */
+app.post('/', routes.saveMessage, routes.sendMessage);

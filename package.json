@@ -25,6 +25,8 @@
   "homepage": "https://github.com/codeschool/nodejs-soup-to-bits",
   "dependencies": {
     "axon": "^2.0.0",
-    "express": "^3.5.1"
+    "express": "^3.5.1",
+    "redis": "^0.10.1",
+    "underscore": "^1.6.0"
   }
 }
