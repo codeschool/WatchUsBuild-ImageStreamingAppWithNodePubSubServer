@@ -20,4 +20,9 @@ app.use(express.json());
 /**
  *  Accept POST requests and then publish the body of the request
  */
-app.post('/', routes.saveMessage, routes.sendMessage);
+app.post('/', routes.saveBadges, routes.sendBadges);
+
+/**
+ *  Get the most recent 10 badges
+ */
+app.get('/badges', routes.getBadges);

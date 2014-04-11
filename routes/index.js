@@ -5,11 +5,11 @@ var redis = require('../lib/redis');
 var _ = require('underscore');
 
 /**
- *  Save our message 
+ *  Save our badges
  */
-exports.saveMessage = function(req, res, next) {
-  var messages = _.clone(req.body);
-  redis.save(messages, function(err, data){
+exports.saveBadges = function(req, res, next) {
+  var badges = _.clone(req.body);
+  redis.save(badges, function(err, data){
     if (err) return res.send(503, err);
     next();
     redis.trim();
@@ -17,10 +17,20 @@ exports.saveMessage = function(req, res, next) {
 };
 
 /**
- *  Send our message
+ *  Send our badges
  */
-exports.sendMessage = function(req, res, next) {
-  var messages = req.body;
-  messages.forEach(socket.send);
+exports.sendBadges = function(req, res, next) {
+  var badges = req.body;
+  badges.forEach(socket.send);
   res.send(200, 'success');
+};
+
+/**
+ *  Get our badges
+ */
+exports.getBadges = function(req, res, next) {
+  redis.get(function(err, data){
+    if (err) return res.send(503, 'Trouble loading badges');
+    res.json(200, data.map(JSON.parse));
+  });
 };
