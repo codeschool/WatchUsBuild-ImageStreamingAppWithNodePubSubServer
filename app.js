@@ -1,7 +1,7 @@
 'use strict';
 
 var express = require('express');
-var routes = require('./routes');
+var badges = require('./controllers/badges');
 
 var app = express();
 
@@ -20,9 +20,9 @@ app.use(express.json());
 /**
  *  Accept POST requests and then publish the body of the request
  */
-app.post('/', routes.saveBadges, routes.sendBadges);
+app.post('/', badges.save, badges.trim, badges.send);
 
 /**
  *  Get the most recent 10 badges
  */
-app.get('/badges', routes.getBadges);
+app.get('/badges', badges.get);
