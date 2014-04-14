@@ -20,7 +20,7 @@ exports.saveBadges = function(req, res, next) {
  *  Send our badges
  */
 exports.sendBadges = function(req, res, next) {
-  var badges = req.body;
+  var badges = _.clone(req.body);
   badges.forEach(socket.send);
   res.send(200, 'success');
 };
