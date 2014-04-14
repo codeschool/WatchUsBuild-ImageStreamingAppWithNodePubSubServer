@@ -4,12 +4,13 @@ var express = require('express');
 var badges = require('./controllers/badges');
 
 var app = express();
+var port = process.env.PORT || 8000;
 
 /**
  *  Have our server listen on port 8000
  */
-app.listen(8000, function(){
-  console.log('Server running on port %d', 8000);
+app.listen(port, function(){
+  console.log('Server running on port %d', port);
 });
 
 /**
