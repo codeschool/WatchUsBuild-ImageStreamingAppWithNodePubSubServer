@@ -1,6 +1,5 @@
 'use strict';
 
-var socket = require('../lib/socket');
 var badges = require('../models/badges');
 var _ = require('underscore');
 
@@ -28,7 +27,7 @@ exports.trim = function(req, res, next) {
  */
 exports.send = function(req, res, next) {
   var badgeList = _.clone(req.body);
-  badgeList.forEach(socket.send);
+  badges.send(badgeList);
   res.send(200, 'success');
 };
 
@@ -37,7 +36,10 @@ exports.send = function(req, res, next) {
  */
 exports.get = function(req, res, next) {
   badges.get(function(err, data){
-    if (err) return res.send(503, 'Trouble loading badges');
-    res.json(200, data.map(JSON.parse));
+    res.json(err ? 503 : 200, {
+      error: err ? true : null,
+      errorMessage: err ? err : null,
+      data: data
+    });
   });
 };
