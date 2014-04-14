@@ -1,18 +1,18 @@
 'use strict';
 
 var socket = require('../lib/pub');
-var redis = require('../lib/redis');
+var badges = require('../models/badges');
 var _ = require('underscore');
 
 /**
  *  Save our badges
  */
 exports.saveBadges = function(req, res, next) {
-  var badges = _.clone(req.body);
-  redis.save(badges, function(err, data){
+  var badgeList = _.clone(req.body);
+  badges.save(badgeList, function(err, data){
     if (err) return res.send(503, err);
     next();
-    redis.trim();
+    badges.trim();
   });
 };
 
@@ -20,8 +20,8 @@ exports.saveBadges = function(req, res, next) {
  *  Send our badges
  */
 exports.sendBadges = function(req, res, next) {
-  var badges = _.clone(req.body);
-  badges.forEach(socket.send);
+  var badgeList = _.clone(req.body);
+  badgeList.forEach(socket.send);
   res.send(200, 'success');
 };
 
@@ -29,7 +29,7 @@ exports.sendBadges = function(req, res, next) {
  *  Get our badges
  */
 exports.getBadges = function(req, res, next) {
-  redis.get(function(err, data){
+  badges.get(function(err, data){
     if (err) return res.send(503, 'Trouble loading badges');
     res.json(200, data.map(JSON.parse));
   });
